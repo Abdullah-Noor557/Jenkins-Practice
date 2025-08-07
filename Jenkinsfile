@@ -1,28 +1,23 @@
-pipeline{
-  agent any
-
-  stages {
-    stage("build"){
-      
-      steps{
-        echo 'Hello Im Running Build in main After update it should trigger after each minute'
-      }
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS'
     }
-
-
-    stage("test"){
-      
-      steps{
-        echo 'Hello Im Running test in main'
-      }
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
     }
-
-      stage("deploy"){
-      
-      steps{
-        echo 'Hello Im Running deploy in main'
-      }
-    }
-    
-  }
 }
